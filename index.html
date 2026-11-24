@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The Royal Wedding Cake Planner</title>
+<meta name="description" content="Costing, pricing and production planner for a five-tier luxury wedding cake in Saint Lucia. All money in EC$.">
+<meta name="theme-color" content="#13307a">
+<style>
+:root{
+  --blue:#13307a; --blue-d:#0b1f55; --blue-l:#2a4fb0;
+  --ivory:#fffaf0; --ivory-d:#f4ead6; --gold:#c9a227; --gold-l:#e9cf7a; --gold-d:#9a7a17;
+  --ink:#1d2340; --muted:#5b6080; --ok:#1f7a4d; --warn:#a4451c;
+  --goldgrad:linear-gradient(135deg,#9a7a17 0%,#e9cf7a 35%,#c9a227 55%,#f6e7a8 75%,#9a7a17 100%);
+  --r:16px; --shadow:0 6px 22px rgba(11,31,85,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--ivory);color:var(--ink);font:17px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3,.serif{font-family:"Playfair Display","Didot","Bodoni 72",Georgia,"Times New Roman",serif;font-weight:700;letter-spacing:.01em}
+h2{color:var(--blue);font-size:1.6rem;margin:0 0 .25rem}
+h3{color:var(--blue-d);font-size:1.15rem;margin:1.2rem 0 .5rem}
+p{margin:.4rem 0}
+a{color:var(--blue-l)}
+.wrap{max-width:1000px;margin:0 auto;padding:0 16px}
+/* hero */
+.hero{background:radial-gradient(120% 90% at 50% 0%,var(--blue-l) 0%,var(--blue) 45%,var(--blue-d) 100%);color:var(--ivory);padding:28px 0 34px;text-align:center;border-bottom:4px solid transparent;border-image:var(--goldgrad) 1}
+.hero .crown{font-size:2rem;line-height:1;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero h1{font-size:clamp(1.9rem,7vw,3rem);margin:.3rem 0 .2rem;background:var(--goldgrad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.eyebrow{color:var(--gold-l);letter-spacing:.22em;font-size:.78rem;margin:.4rem 0 0}
+@media(min-width:860px){.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;grid-template-areas:"crown photo" "eyebrow photo" "title photo" "sub photo" "cap photo";column-gap:36px;align-items:center;text-align:left}.hero .crown{grid-area:crown}.hero .eyebrow{grid-area:eyebrow}.hero h1{grid-area:title}.hero .sub{grid-area:sub}.hero .photo-frame{grid-area:photo;margin:0!important}.hero .photo-cap{grid-area:cap}}
+.hero .sub{color:var(--ivory-d);margin:0 0 18px;font-size:1rem}
+.photo-frame{margin:0 auto;max-width:360px;padding:8px;border-radius:22px;background:var(--goldgrad);box-shadow:0 12px 36px rgba(0,0,0,.35)}
+.photo-frame img{display:block;width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border-radius:16px;background:var(--ivory-d)}
+.photo-cap{font-size:.85rem;color:var(--gold-l);margin-top:10px;font-style:italic}
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--blue-d);border-bottom:2px solid var(--gold);overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+nav.tabs::-webkit-scrollbar{display:none}
+nav.tabs ul{display:flex;gap:6px;list-style:none;margin:0;padding:8px 10px;white-space:nowrap}
+nav.tabs a{display:inline-block;color:var(--ivory);text-decoration:none;padding:10px 14px;border-radius:999px;font-size:.95rem;min-height:44px;border:1px solid rgba(233,207,122,.35)}
+nav.tabs a:hover,nav.tabs a:focus{background:var(--gold);color:var(--blue-d);outline:none}
+/* sections */
+section.card{background:#fff;border:1px solid var(--ivory-d);border-top:4px solid var(--gold);border-radius:var(--r);box-shadow:var(--shadow);padding:20px 16px;margin:20px 0}
+.lead{color:var(--muted);font-size:.95rem}
+.grid{display:grid;gap:12px}
+.g2{grid-template-columns:1fr}
+.g3{grid-template-columns:1fr 1fr}
+@media(min-width:700px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}section.card{padding:26px 28px}}
+.stat{background:var(--ivory);border:1px solid var(--ivory-d);border-radius:14px;padding:12px 14px}
+.stat .k{font-size:.82rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.stat .v{font-size:1.45rem;font-weight:700;color:var(--blue-d);font-variant-numeric:tabular-nums}
+.stat.hl{background:var(--blue);border-color:var(--blue)}
+.stat.hl .k{color:var(--gold-l)}.stat.hl .v{color:#fff}
+.stat.gold{background:var(--goldgrad);border:0}.stat.gold .k{color:var(--blue-d)}.stat.gold .v{color:var(--blue-d)}
+.neg{color:var(--warn)!important}
+/* forms */
+label{display:block;font-weight:600;font-size:.95rem;margin:.2rem 0}
+input,select,textarea{font:inherit;font-size:17px;width:100%;min-height:48px;padding:10px 12px;border:1.5px solid #c9cbe0;border-radius:12px;background:#fff;color:var(--ink)}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--gold-l);border-color:var(--blue)}
+input[type=checkbox]{width:28px;height:28px;min-height:28px;accent-color:var(--blue);flex:none;margin:0}
+input[type=range]{padding:0;border:0;accent-color:var(--gold-d);min-height:44px}
+.field{margin:8px 0}
+.money{position:relative}
+.money::before{content:"EC$";position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:.9rem;pointer-events:none}
+.money input{padding-left:46px}
+button,.btn{font:inherit;font-weight:700;font-size:1rem;min-height:48px;padding:10px 18px;border-radius:12px;border:2px solid var(--blue);background:var(--blue);color:#fff;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none}
+button:hover{background:var(--blue-l)}
+button.ghost{background:#fff;color:var(--blue)}
+button.gold{background:var(--goldgrad);border-color:var(--gold-d);color:var(--blue-d)}
+button.danger{background:#fff;border-color:var(--warn);color:var(--warn)}
+button.x{min-height:44px;min-width:44px;padding:0;border:1.5px solid #d8d9e8;background:#fff;color:var(--warn);font-size:1.2rem}
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+/* rows */
+.rows{display:flex;flex-direction:column;gap:10px}
+.row{display:grid;gap:8px;background:var(--ivory);border:1px solid var(--ivory-d);border-radius:14px;padding:10px}
+.row.tier{grid-template-columns:1fr 1fr}
+.row.tier .name{grid-column:1/-1;font-weight:700;color:var(--blue-d)}
+.row.item{grid-template-columns:auto 1fr auto;align-items:center}
+.row.item .sub2{grid-column:2/4;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.row.simple{grid-template-columns:1fr 9.5rem auto;align-items:center}
+.row.task{grid-template-columns:1fr 1fr;align-items:end}
+.row.task .tname{grid-column:1/-1}
+.row.task .tsub{grid-column:1/-1;display:flex;justify-content:space-between;font-size:.92rem;color:var(--muted)}
+@media(min-width:700px){.row.tier{grid-template-columns:2fr 1fr 2fr 1.3fr}.row.tier .name{grid-column:auto;align-self:center}
+.row.task{grid-template-columns:2fr 1fr 1fr 1fr}.row.task .tname{grid-column:auto}.row.task .tsub{grid-column:auto;flex-direction:column;align-self:center}}
+.row.done{opacity:.7}.row.done .iname{text-decoration:line-through}
+.total{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:1.15rem;color:var(--blue-d);border-top:2px solid var(--gold);margin-top:12px;padding-top:10px}
+.note{background:#f6f1e2;border-left:4px solid var(--gold);padding:10px 12px;border-radius:10px;font-size:.93rem;margin:10px 0}
+.note.warn{background:#fdf0ea;border-color:var(--warn)}
+.note.ok{background:#eaf6ef;border-color:var(--ok)}
+/* charts */
+.chart{display:grid;grid-template-columns:1fr;gap:16px;align-items:center}
+@media(min-width:700px){.chart{grid-template-columns:240px 1fr}}
+.donut{width:220px;height:220px;border-radius:50%;margin:0 auto;position:relative}
+.donut::after{content:"";position:absolute;inset:28%;background:#fff;border-radius:50%;box-shadow:inset 0 0 0 3px var(--gold-l)}
+.donut .c{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:1;text-align:center;font-size:.8rem;color:var(--muted)}
+.donut .c b{font-size:1.15rem;color:var(--blue-d)}
+.bars{display:flex;flex-direction:column;gap:8px}
+.bar .lbl{display:flex;justify-content:space-between;font-size:.92rem;gap:8px}
+.bar .track{height:14px;background:var(--ivory-d);border-radius:8px;overflow:hidden}
+.bar .fill{height:100%;border-radius:8px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+/* table */
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th,td{padding:10px 8px;text-align:right;border-bottom:1px solid var(--ivory-d)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--blue);font-size:.85rem;text-transform:uppercase;letter-spacing:.05em}
+tr.cur td{background:#fbf3d6;font-weight:700}
+.tag{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--blue);color:#fff;margin-left:6px;vertical-align:1px}
+.tag.g{background:var(--goldgrad);color:var(--blue-d)}
+/* timeline */
+.tl{list-style:none;margin:0;padding:0 0 0 22px;border-left:3px solid var(--gold)}
+.tl li{position:relative;margin:0 0 16px;padding-left:8px}
+.tl li::before{content:"";position:absolute;left:-33px;top:4px;width:18px;height:18px;border-radius:50%;background:var(--blue);border:3px solid var(--gold-l)}
+.tl .when{font-weight:700;color:var(--blue)}
+.tl .date{color:var(--gold-d);font-weight:700}
+.tl ul{margin:.3rem 0 0;padding-left:20px}
+/* checklist */
+.prog{height:22px;background:var(--ivory-d);border-radius:999px;overflow:hidden;border:1px solid var(--gold-l)}
+.prog>div{height:100%;background:var(--goldgrad);transition:width .3s}
+.check{display:flex;gap:12px;align-items:center;padding:10px;border-radius:12px;background:var(--ivory);border:1px solid var(--ivory-d);min-height:52px;cursor:pointer;font-weight:500}
+.check.on{background:#eef2fb}.check.on span{text-decoration:line-through;color:var(--muted)}
+/* quote */
+.quote{background:var(--ivory);border:2px solid var(--gold);border-radius:var(--r);padding:20px;font-size:1rem}
+.quote h3{text-align:center;margin-top:0;font-size:1.4rem}
+.quote .qrow{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dotted var(--gold-l);padding:6px 0}
+.quote .qrow b{text-align:right}
+.quote pre{white-space:pre-wrap;font:inherit;margin:.3rem 0}
+.saved{position:fixed;right:12px;bottom:12px;background:var(--blue-d);color:var(--gold-l);padding:8px 14px;border-radius:999px;font-size:.85rem;box-shadow:var(--shadow);opacity:0;transition:opacity .3s;z-index:30;pointer-events:none}
+.saved.show{opacity:1}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:20px 16px 60px}
+.sr{position:absolute;left:-9999px}
+/* print */
+.print-only{display:none}
+@media print{
+  body{background:#fff;font-size:12pt}
+  nav.tabs,.saved,.hero,footer,.no-print,button{display:none!important}
+  section.card{box-shadow:none;border:0;margin:0;padding:0}
+  body.print-quote main>section:not(#quote){display:none!important}
+  body.print-quote #quote>*:not(.quote){display:none!important}
+  body.print-shop main>section:not(#shopping){display:none!important}
+  body.print-shop #shopping .row input{border:0;padding:0;min-height:0}
+  body.print-shop #shopping .row{break-inside:avoid}
+  .quote{border:2px solid #c9a227}
+  .print-only{display:block}
+}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="crown" aria-hidden="true">♛</div>
+    <p class="eyebrow">SAINT LUCIA · EC DOLLARS</p>
+    <h1>The Royal Wedding Cake Planner</h1>
+    <p class="sub">Costing, pricing &amp; production for a five-tier luxury wedding cake · Saint Lucia · all amounts in EC$</p>
+    <figure class="photo-frame" style="margin:0 auto">
+      <img src="cake.jpg" alt="Five-tier royal blue, ivory and gold wedding cake" width="900" height="1200" id="cakePhoto">
+    </figure>
+    <p class="photo-cap">Original reference photograph</p>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="Sections">
+  <ul>
+    <li><a href="#dashboard">Dashboard</a></li>
+    <li><a href="#tiers">Tiers</a></li>
+    <li><a href="#shopping">Shopping list</a></li>
+    <li><a href="#decor">Decorations</a></li>
+    <li><a href="#labour">Labour</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#payments">Payments</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#quote">Quotation</a></li>
+    <li><a href="#data">Data &amp; privacy</a></li>
+  </ul>
+</nav>
+
+<main class="wrap">
+
+<section class="card" id="dashboard">
+  <h2>Financial dashboard</h2>
+  <p class="lead">Live totals. Change any cost, hour or price below and everything here updates.</p>
+  <div class="note"><b>Before accepting the order:</b> confirm the actual recipes, supplier prices, cake dimensions, allergies, venue and labour hours.</div>
+  <div class="grid g3" id="dashStats"></div>
+  <h3>Expense breakdown</h3>
+  <div class="chart">
+    <div class="donut" id="donut" role="img" aria-label="Expense breakdown chart"><div class="c"><span>Total cost</span><b id="donutTotal"></b></div></div>
+    <div class="bars" id="bars"></div>
+  </div>
+</section>
+
+<section class="card" id="tiers">
+  <h2>Cake tiers</h2>
+  <p class="lead">Size, flavour and ingredient cost per tier. All editable.</p>
+  <div class="rows" id="tierRows"></div>
+  <div class="total"><span>Tier ingredient total</span><span id="tierTotal"></span></div>
+  <div class="note" id="tierNote"></div>
+  <p class="lead">All tiers are edible. Confirm sizes, flavours and recipes with the customer before quoting.</p>
+</section>
+
+<section class="card" id="shopping">
+  <h2>Ingredient shopping list</h2>
+  <p class="lead no-print">Edit quantities and costs, tick items as you buy them, add anything missing. This list <b>is</b> the ingredients cost used in every calculation.</p>
+  <p class="print-only"><b>The Royal Wedding Cake Planner — Ingredient shopping list</b></p>
+  <div class="rows" id="shopRows"></div>
+  <div class="btns no-print"><button type="button" class="ghost" id="addShop">+ Add ingredient</button><button type="button" class="gold" id="printShop">Print shopping list</button></div>
+  <div class="total"><span>Ingredients total</span><span id="shopTotal"></span></div>
+  <p id="shopBought" class="lead"></p>
+</section>
+
+<section class="card" id="decor">
+  <h2>Decorations</h2>
+  <div class="rows" id="decoRows"></div>
+  <div class="btns"><button type="button" class="ghost" id="addDeco">+ Add decoration</button></div>
+  <div class="total"><span>Decorations total</span><span id="decoTotal"></span></div>
+  <h3>Other costs</h3>
+  <div class="grid g3">
+    <div class="field"><label for="utilities">Utilities (gas, electricity, water)</label><div class="money"><input id="utilities" type="number" inputmode="decimal" min="0" step="1" data-k="utilities"></div></div>
+    <div class="field"><label for="delivery">Delivery</label><div class="money"><input id="delivery" type="number" inputmode="decimal" min="0" step="1" data-k="delivery"></div></div>
+    <div class="field"><label for="contingency">Contingency</label><div class="money"><input id="contingency" type="number" inputmode="decimal" min="0" step="1" data-k="contingency"></div></div>
+  </div>
+  <h3>Extra expenses</h3>
+  <p class="lead">Cake stand rental, boxes, travel, anything else. Added to the total production cost.</p>
+  <div class="rows" id="extraRows"></div>
+  <div class="btns"><button type="button" class="ghost" id="addExtra">+ Add extra expense</button></div>
+  <div class="total"><span>Extra expenses total</span><span id="extraTotal"></span></div>
+</section>
+
+<section class="card" id="labour">
+  <h2>Labour</h2>
+  <p class="lead">Labour is a <b>cost</b>, not profit: it pays for the time spent. Edit hours and hourly rates.</p>
+  <div class="grid g2">
+    <div class="field"><label for="labourRate">Default hourly rate</label><div class="money"><input id="labourRate" type="number" inputmode="decimal" min="0" step="1"></div></div>
+    <div class="field" style="align-self:end"><button type="button" class="ghost" id="applyRate" style="width:100%">Apply rate to all tasks</button></div>
+  </div>
+  <div class="rows" id="taskRows"></div>
+  <div class="btns"><button type="button" class="ghost" id="addTask">+ Add task</button></div>
+  <div class="total"><span id="labourHours"></span><span id="labourTotal"></span></div>
+</section>
+
+<section class="card" id="pricing">
+  <h2>Pricing calculator</h2>
+  <div class="grid g3" id="priceStats"></div>
+  <div class="field"><label for="priceSlider">Selling price: <span id="priceSliderVal"></span></label>
+    <input id="priceSlider" type="range" min="1500" max="6000" step="50" aria-describedby="priceSliderVal"></div>
+  <div class="grid g2">
+    <div class="field"><label for="priceInput">Enter selling price</label><div class="money"><input id="priceInput" type="number" inputmode="decimal" min="0" step="10"></div></div>
+    <div class="field"><label for="marginInput">Desired profit margin (%)</label>
+      <div style="display:flex;gap:8px"><input id="marginInput" type="number" inputmode="decimal" min="0" max="95" step="0.1" value="34.4"><button type="button" id="applyMargin" style="flex:none">Use price</button></div>
+      <p class="lead" id="marginOut"></p>
+      <div class="btns" style="margin-top:6px"><button type="button" class="ghost" data-margin="30">30%</button><button type="button" class="ghost" data-margin="35">35%</button><button type="button" class="ghost" data-margin="40">40%</button></div></div>
+  </div>
+  <div class="grid g2">
+    <div class="field"><label for="minPrice">Minimum recommended price</label><div class="money"><input id="minPrice" type="number" inputmode="decimal" min="0" step="10" data-k="minPrice"></div></div>
+    <div class="field"><label for="recPrice">Recommended price</label><div class="money"><input id="recPrice" type="number" inputmode="decimal" min="0" step="10" data-k="recPrice"></div></div>
+  </div>
+  <div class="note" id="priceNote"></div>
+  <h3>Price scenarios</h3>
+  <div style="overflow-x:auto"><table id="scenarios"><thead><tr><th>Selling price</th><th>Profit</th><th>Margin</th></tr></thead><tbody></tbody></table></div>
+  <p class="lead">Tap a scenario to use that price.</p>
+</section>
+
+<section class="card" id="payments">
+  <h2>Payments</h2>
+  <div class="grid g2">
+    <div class="field"><label for="weddingDate">Wedding date</label><input id="weddingDate" type="date" data-k="weddingDate"></div>
+    <div class="field"><label for="finalDeadline">Final payment deadline</label><input id="finalDeadline" type="date">
+      <p class="lead" id="deadlineHint"></p></div>
+    <div class="field"><label for="depositPct">Deposit (%)</label><input id="depositPct" type="number" inputmode="decimal" min="0" max="100" step="1" data-k="depositPct"></div>
+    <div class="field"><label for="received">Amount received so far</label><div class="money"><input id="received" type="number" inputmode="decimal" min="0" step="10" data-k="received"></div></div>
+  </div>
+  <div class="grid g3" id="payStats"></div>
+</section>
+
+<section class="card" id="timeline">
+  <h2>Production timeline</h2>
+  <p class="lead" id="tlLead"></p>
+  <ol class="tl" id="tlList"></ol>
+  <h3>Tropical heat reminders (Saint Lucia)</h3>
+  <div class="note warn"><b>Food safety:</b> keep butter, cream, eggs and fillings refrigerated (below 5&nbsp;°C). Do not leave cream, buttercream or strawberry fillings at room temperature for more than 2 hours, or 1 hour in hot weather. Wash hands and surfaces; keep raw eggs apart.</div>
+  <div class="note warn"><b>Refrigeration:</b> chill filled tiers before covering, and keep the finished cake in an air-conditioned or refrigerated space. Allow chilled fondant to come up slowly in a cool room so it doesn't sweat; humidity makes fondant soft and sticky.</div>
+  <div class="note warn"><b>Structure:</b> use a cake board under every tier, dowels or straws in every tier that carries weight, and a centre dowel through the stack. A 14&quot; fruit cake base carries the most load; check it is level.</div>
+  <div class="note warn"><b>Transport:</b> pre-cool the vehicle with A/C, keep the cake flat on a non-slip mat, drive slowly, and avoid midday sun. Transporting tiers separately and stacking at the venue is safest. Bring a repair kit (spare icing, piping bags, palette knife, spare flowers).</div>
+  <div class="note warn"><b>At the venue:</b> set up in shade or indoors, away from windows, heat lamps and direct sun. Confirm with the venue where the cake will stand and for how long before cutting.</div>
+</section>
+
+<section class="card" id="checklist">
+  <h2>Checklist</h2>
+  <p><b id="checkPct">0%</b> complete <span class="lead" id="checkCount"></span></p>
+  <div class="prog" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="checkBar"><div style="width:0"></div></div>
+  <div class="rows" id="checkRows" style="margin-top:12px"></div>
+</section>
+
+<section class="card" id="quote">
+  <h2>Customer quotation</h2>
+  <p class="lead">For the customer. It never shows internal costs, labour or profit.</p>
+  <div class="grid g2">
+    <div class="field"><label for="custName">Customer name</label><input id="custName" type="text" autocomplete="off" data-k="custName"></div>
+    <div class="field"><label for="custPhone">Customer phone (optional)</label><input id="custPhone" type="tel" autocomplete="off" data-k="custPhone"></div>
+    <div class="field"><label for="venue">Venue</label><input id="venue" type="text" data-k="venue"></div>
+    <div class="field"><label for="guests">Guest count</label><input id="guests" type="number" inputmode="numeric" min="0" data-k="guests"></div>
+  </div>
+  <div class="field"><label for="cakeDesign">Design description</label><input id="cakeDesign" type="text" data-k="cakeDesign"></div>
+  <div class="field"><label for="terms">Terms &amp; conditions (editable)</label><textarea id="terms" data-k="terms"></textarea></div>
+  <div class="quote" id="quoteDoc"></div>
+  <div class="btns">
+    <button type="button" id="copyQuote">Copy to clipboard</button>
+    <button type="button" class="gold" id="waQuote">Share to WhatsApp</button>
+    <button type="button" class="ghost" id="printQuote">Print</button>
+    <button type="button" class="ghost" id="pdfQuote">Save as PDF</button>
+  </div>
+  <p class="lead" id="quoteMsg" aria-live="polite"></p>
+</section>
+
+<section class="card" id="data">
+  <h2>Data &amp; privacy</h2>
+  <div class="note ok"><b>Saved automatically on this device.</b> Everything you type is saved in this browser's local storage and comes back when you reopen the page. Nothing is sent to a server: there is no login and no database, and customer details stay on this device.</div>
+  <div class="note">Saved data is <b>per device and per browser</b>. Your phone and computer keep separate copies, and a private/incognito window or clearing browser data starts fresh. Use the quotation's copy or PDF to keep a record elsewhere.</div>
+  <div class="note warn"><b>Disclaimer:</b> all costs and prices are estimates. Check them against real supplier prices in Saint Lucia before quoting a customer.</div>
+  <p class="lead" id="lastSaved"></p>
+  <div class="btns"><button type="button" class="danger" id="resetAll">Reset to defaults</button></div>
+</section>
+</main>
+<footer>The Royal Wedding Cake Planner · All amounts in Eastern Caribbean dollars (EC$)</footer>
+<div class="saved" id="savedPill" aria-live="polite">Saved ✓</div>
+
+<script>
+(function(){
+"use strict";
+var KEY="royalWeddingCakePlanner.v1";
+var COLORS=["#13307a","#c9a227","#2a4fb0","#9a7a17","#6f86c9","#e9cf7a","#0b1f55","#b9a16a"];
+var DEFAULT_TERMS="1. The deposit shown above secures your wedding date. Your order is confirmed once it is received.\n2. The balance is due by the final payment deadline shown above. The cake is delivered only once it is paid in full.\n3. The deposit is non-refundable once ingredients and decorations have been bought.\n4. Changes to the design, flavours or sizes must be agreed at least 14 days before the wedding and may change the price.\n5. Allergens: the cake contains wheat, eggs and dairy, the fruit cake contains alcohol, and it may contain traces of nuts. Please tell us about any allergies before you confirm.\n6. The price includes delivery and set-up at the venue named above. A cake stand and extra handmade sugar flowers are not included unless listed.\n7. The venue must provide a cool, shaded, level table away from direct sun. Once set up, the cake is in the care of the customer and venue.\n8. All prices are in EC$. This quotation is valid for 14 days.";
+function defaults(){
+  return {
+    tiers:[
+      {name:"Bottom tier",size:"14 in",flavour:"Fruit cake",cost:350},
+      {name:"Fourth tier",size:"12 in",flavour:"Vanilla",cost:160},
+      {name:"Third tier",size:"10 in",flavour:"Vanilla",cost:120},
+      {name:"Second tier",size:"8 in",flavour:"Strawberry",cost:100},
+      {name:"Top tier",size:"6 in",flavour:"Cookies and cream",cost:80}],
+    shop:[
+      ["Flour",55],["Sugar",45],["Butter/margarine",130],["Eggs",75],["Milk/cream",55],["Dried/mixed fruit",170],["Rum/wine",100],["Vanilla/flavourings",35],["Strawberry filling",45],["Cookies and cream filling",35],["Spices, browning and supplies",65]
+    ].map(function(a){return {name:a[0],qty:"",cost:a[1],bought:false};}),
+    deco:[["Fondant/buttercream",180],["Flowers",150],["Gold decorations",100],["Ribbons",35],["Boards and supports",100]].map(function(a){return {name:a[0],cost:a[1]};}),
+    extras:[{name:"Cake stand rental",cost:0}],
+    labourRate:25,
+    tasks:[["Preparation and purchasing",2],["Mixing and baking",5],["Filling and frosting",3],["Fondant application",3],["Decorating",4],["Final preparation",1]].map(function(a){return {name:a[0],hours:a[1],rate:25};}),
+    utilities:75,delivery:100,contingency:100,
+    price:3200,minPrice:2800,recPrice:3200,scenarios:[2500,2800,3000,3200,3500],
+    depositPct:60,received:0,weddingDate:"",finalDeadline:"",
+    custName:"",custPhone:"",venue:"",guests:"",cakeDesign:"Five-tier royal blue, ivory and gold wedding cake with fondant finish, flowers and gold decorations",
+    terms:DEFAULT_TERMS,
+    checks:{}
+  };
+}
+var CHECKS=["Confirm wedding date and venue","Confirm guest count","Confirm cake dimensions and flavours","Check allergies","Approve the design","Collect the deposit","Buy ingredients","Buy decorations","Prepare boards and supports","Arrange the cake stand","Bake the tiers","Fill and frost","Decorate","Collect the final payment","Deliver and assemble"];
+var S;
+try{S=JSON.parse(localStorage.getItem(KEY)||"null");}catch(e){S=null;}
+if(!S||typeof S!=="object"){S=defaults();}else{var d0=defaults();for(var k in d0){if(!(k in S))S[k]=d0[k];}}
+
+var $=function(id){return document.getElementById(id);};
+function num(v){var n=parseFloat(v);return isFinite(n)?n:0;}
+function r2(n){return Math.round(n*100)/100;}
+function fmt(n){n=r2(n);var neg=n<0;n=Math.abs(n);var s=n.toLocaleString("en-US",{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});return (neg?"−":"")+"EC$"+s;}
+function pct(n){return (isFinite(n)?(Math.round(n*10)/10).toFixed(1):"0.0")+"%";}
+function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
+function sum(a,f){return a.reduce(function(t,x){return t+num(f(x));},0);}
+function parseD(s){if(!s)return null;var p=s.split("-");if(p.length!==3)return null;var d=new Date(+p[0],+p[1]-1,+p[2]);return isNaN(d)?null:d;}
+function addDays(d,n){var x=new Date(d.getFullYear(),d.getMonth(),d.getDate()+n);return x;}
+function iso(d){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");}
+function nice(d){return d?d.toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"}):"";}
+
+/* ---------- calculations ---------- */
+function calc(){
+  var c={};
+  c.tierTotal=sum(S.tiers,function(t){return t.cost;});
+  c.ingredients=sum(S.shop,function(t){return t.cost;});   // single source for ingredients cost
+  c.decorations=sum(S.deco,function(t){return t.cost;});
+  c.extras=sum(S.extras,function(t){return t.cost;});
+  c.hours=sum(S.tasks,function(t){return t.hours;});
+  c.labour=S.tasks.reduce(function(t,x){return t+num(x.hours)*num(x.rate);},0);
+  c.utilities=num(S.utilities);c.delivery=num(S.delivery);c.contingency=num(S.contingency);
+  c.cost=c.ingredients+c.decorations+c.labour+c.utilities+c.delivery+c.contingency+c.extras;
+  c.price=num(S.price);
+  c.profit=c.price-c.cost;
+  c.margin=c.price>0?c.profit/c.price*100:0;
+  c.deposit=c.price*num(S.depositPct)/100;
+  c.balanceAfterDeposit=c.price-c.deposit;
+  c.received=num(S.received);
+  c.outstanding=Math.max(0,c.price-c.received);
+  return c;
+}
+window.__calc=calc;
+
+/* ---------- save ---------- */
+var saveT,pillT;
+function save(){clearTimeout(saveT);saveT=setTimeout(function(){
+  try{S.savedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(S));
+    var p=$("savedPill");p.classList.add("show");clearTimeout(pillT);pillT=setTimeout(function(){p.classList.remove("show");},1200);
+    $("lastSaved").textContent="Last saved on this device: "+new Date(S.savedAt).toLocaleString();
+  }catch(e){$("lastSaved").textContent="Could not save on this device (storage may be off in private browsing).";}
+},150);}
+function changed(){updateAll();save();}
+
+/* ---------- list rendering ---------- */
+function moneyInput(val,attrs,label){return '<div class="money"><input type="number" inputmode="decimal" min="0" step="1" value="'+esc(val)+'" '+attrs+' aria-label="'+esc(label)+'"></div>';}
+function renderTiers(){
+  $("tierRows").innerHTML=S.tiers.map(function(t,i){
+    return '<div class="row tier"><div class="name">'+esc(t.name)+'</div>'+
+    '<div><label class="sr" for="ts'+i+'">Size</label><input id="ts'+i+'" type="text" value="'+esc(t.size)+'" data-list="tiers" data-i="'+i+'" data-f="size" aria-label="'+esc(t.name)+' size"></div>'+
+    '<div><input type="text" value="'+esc(t.flavour)+'" data-list="tiers" data-i="'+i+'" data-f="flavour" aria-label="'+esc(t.name)+' flavour"></div>'+
+    '<div>'+moneyInput(t.cost,'data-list="tiers" data-i="'+i+'" data-f="cost" data-n="1"',t.name+' cost')+'</div></div>';
+  }).join("");
+}
+function renderShop(){
+  $("shopRows").innerHTML=S.shop.map(function(t,i){
+    return '<div class="row item'+(t.bought?' done':'')+'">'+
+    '<input type="checkbox" '+(t.bought?'checked':'')+' data-list="shop" data-i="'+i+'" data-f="bought" aria-label="Bought '+esc(t.name)+'">'+
+    '<input class="iname" type="text" value="'+esc(t.name)+'" data-list="shop" data-i="'+i+'" data-f="name" aria-label="Ingredient name">'+
+    '<button type="button" class="x no-print" data-del="shop" data-i="'+i+'" aria-label="Remove '+esc(t.name)+'">×</button>'+
+    '<div class="sub2"><input type="text" placeholder="Quantity e.g. 10 lb" value="'+esc(t.qty)+'" data-list="shop" data-i="'+i+'" data-f="qty" aria-label="'+esc(t.name)+' quantity">'+
+    moneyInput(t.cost,'data-list="shop" data-i="'+i+'" data-f="cost" data-n="1"',t.name+' cost')+'</div></div>';
+  }).join("");
+}
+function renderSimple(list,el){
+  $(el).innerHTML=S[list].map(function(t,i){
+    return '<div class="row simple"><input type="text" value="'+esc(t.name)+'" data-list="'+list+'" data-i="'+i+'" data-f="name" aria-label="Item name">'+
+    moneyInput(t.cost,'data-list="'+list+'" data-i="'+i+'" data-f="cost" data-n="1"',t.name+' cost')+
+    '<button type="button" class="x" data-del="'+list+'" data-i="'+i+'" aria-label="Remove '+esc(t.name)+'">×</button></div>';
+  }).join("");
+}
+function renderTasks(){
+  $("taskRows").innerHTML=S.tasks.map(function(t,i){
+    return '<div class="row task"><div class="tname"><label>Task</label><input type="text" value="'+esc(t.name)+'" data-list="tasks" data-i="'+i+'" data-f="name" aria-label="Task name"></div>'+
+    '<div><label>Hours</label><input type="number" inputmode="decimal" min="0" step="0.5" value="'+esc(t.hours)+'" data-list="tasks" data-i="'+i+'" data-f="hours" data-n="1" aria-label="'+esc(t.name)+' hours"></div>'+
+    '<div><label>Rate / hour</label>'+moneyInput(t.rate,'data-list="tasks" data-i="'+i+'" data-f="rate" data-n="1"',t.name+' rate')+'</div>'+
+    '<div class="tsub"><span data-task-total="'+i+'"></span><button type="button" class="x" data-del="tasks" data-i="'+i+'" aria-label="Remove '+esc(t.name)+'">×</button></div></div>';
+  }).join("");
+}
+function renderChecks(){
+  $("checkRows").innerHTML=CHECKS.map(function(c,i){var on=!!S.checks[i];
+    return '<label class="check'+(on?' on':'')+'"><input type="checkbox" data-check="'+i+'" '+(on?'checked':'')+'><span>'+esc(c)+'</span></label>';}).join("");
+}
+function renderLists(){renderTiers();renderShop();renderSimple("deco","decoRows");renderSimple("extras","extraRows");renderTasks();renderChecks();}
+
+/* ---------- live updates ---------- */
+function stat(k,v,cls,id){return '<div class="stat '+(cls||'')+'"'+(id?' id="'+id+'"':'')+'><div class="k">'+k+'</div><div class="v">'+v+'</div></div>';}
+function updateAll(){
+  var c=calc();
+  $("dashStats").innerHTML=
+    stat("Ingredients",fmt(c.ingredients),"","d-ingredients")+stat("Decorations",fmt(c.decorations),"","d-decorations")+
+    stat("Labour",fmt(c.labour),"","d-labour")+stat("Utilities",fmt(c.utilities),"","d-utilities")+
+    stat("Delivery",fmt(c.delivery),"","d-delivery")+stat("Contingency",fmt(c.contingency),"","d-contingency")+
+    (c.extras?stat("Extra expenses",fmt(c.extras),"","d-extras"):"")+
+    stat("Total production cost",fmt(c.cost),"hl","d-cost")+stat("Selling price",fmt(c.price),"gold","d-price")+
+    stat("Estimated profit",'<span class="'+(c.profit<0?'neg':'')+'">'+fmt(c.profit)+'</span>',"hl","d-profit")+
+    stat("Profit margin",pct(c.margin),"","d-margin")+stat("Deposit ("+num(S.depositPct)+"%)",fmt(c.deposit),"","d-deposit")+
+    stat("Outstanding balance",fmt(c.outstanding),"","d-outstanding");
+  // chart
+  var parts=[["Ingredients",c.ingredients],["Decorations",c.decorations],["Labour",c.labour],["Utilities",c.utilities],["Delivery",c.delivery],["Contingency",c.contingency]];
+  if(c.extras)parts.push(["Extra expenses",c.extras]);
+  var acc=0,stops=[];var tot=c.cost||1;
+  parts.forEach(function(p,i){var a=acc/tot*360,b=(acc+Math.max(0,p[1]))/tot*360;stops.push(COLORS[i%8]+" "+a+"deg "+b+"deg");acc+=Math.max(0,p[1]);});
+  $("donut").style.background=c.cost>0?"conic-gradient("+stops.join(",")+")":"#eee";
+  $("donutTotal").textContent=fmt(c.cost);
+  $("bars").innerHTML=parts.map(function(p,i){var w=c.cost>0?Math.max(0,p[1])/c.cost*100:0;
+    return '<div class="bar"><div class="lbl"><span><i class="sw" style="background:'+COLORS[i%8]+'"></i>'+p[0]+'</span><span>'+fmt(p[1])+' · '+pct(w)+'</span></div><div class="track"><div class="fill" style="width:'+w+'%;background:'+COLORS[i%8]+'"></div></div></div>';}).join("");
+  // tiers
+  $("tierTotal").textContent=fmt(c.tierTotal);
+  var diff=r2(c.tierTotal-c.ingredients);
+  var tn=$("tierNote");
+  if(Math.abs(diff)<0.005){tn.className="note ok";tn.innerHTML="Tier costs match the shopping list ("+fmt(c.ingredients)+"). They are the <b>same expense</b> shown two ways, so it is counted only once.";}
+  else{tn.className="note warn";tn.innerHTML="Tier costs ("+fmt(c.tierTotal)+") and the shopping list ("+fmt(c.ingredients)+") differ by "+fmt(Math.abs(diff))+". They are the same expense, so only the <b>shopping list</b> total is used in the calculations. Adjust one so they match.";}
+  // shop
+  $("shopTotal").textContent=fmt(c.ingredients);
+  var bought=S.shop.filter(function(x){return x.bought;});
+  $("shopBought").textContent=bought.length+" of "+S.shop.length+" items bought · "+fmt(sum(bought,function(x){return x.cost;}))+" spent · "+fmt(c.ingredients-sum(bought,function(x){return x.cost;}))+" still to buy";
+  $("decoTotal").textContent=fmt(c.decorations);
+  $("extraTotal").textContent=fmt(c.extras);
+  // labour
+  S.tasks.forEach(function(t,i){var el=document.querySelector('[data-task-total="'+i+'"]');if(el)el.textContent=fmt(num(t.hours)*num(t.rate));});
+  $("labourHours").textContent="Total "+r2(c.hours)+" hours";
+  $("labourTotal").textContent=fmt(c.labour);
+  // pricing
+  $("priceStats").innerHTML=stat("Total cost",fmt(c.cost),"","p-cost")+stat("Selling price",fmt(c.price),"gold","p-price")+stat("Profit · margin",'<span class="'+(c.profit<0?'neg':'')+'">'+fmt(c.profit)+'</span> · '+pct(c.margin),"hl","p-profit");
+  var sl=$("priceSlider");if(document.activeElement!==sl){sl.value=c.price;}
+  $("priceSliderVal").textContent=fmt(c.price);
+  if(document.activeElement!==$("priceInput"))$("priceInput").value=c.price;
+  var m=num($("marginInput").value);
+  $("marginOut").textContent=(m>=0&&m<100)?("To make a "+pct(m)+" margin, charge "+fmt(Math.ceil(c.cost/(1-m/100)))+" (profit "+fmt(Math.ceil(c.cost/(1-m/100))-c.cost)+")."):"Enter a margin between 0 and 99.";
+  var pn=$("priceNote");var minP=num(S.minPrice),recP=num(S.recPrice);
+  if(c.profit<0){pn.className="note warn";pn.textContent="This price is below the production cost: you would lose "+fmt(-c.profit)+".";}
+  else if(c.price<minP){pn.className="note warn";pn.textContent="This price is below the minimum recommended "+fmt(minP)+".";}
+  else if(c.price<recP){pn.className="note";pn.textContent="Above the minimum ("+fmt(minP)+"), below the recommended "+fmt(recP)+".";}
+  else{pn.className="note ok";pn.textContent="At or above the recommended price of "+fmt(recP)+". Minimum recommended: "+fmt(minP)+".";}
+  if(minP<=c.cost||recP<=c.cost){pn.textContent+=" Note: costs have changed and the minimum/recommended prices no longer cover the "+fmt(c.cost)+" cost. Review them.";pn.className="note warn";}
+  var sc=S.scenarios.slice();[minP,recP].forEach(function(v){if(sc.indexOf(v)<0)sc.push(v);});sc.sort(function(a,b){return a-b;});
+  document.querySelector("#scenarios tbody").innerHTML=sc.map(function(p){var pr=p-c.cost;
+    return '<tr class="'+(p===c.price?'cur':'')+'" data-price="'+p+'" style="cursor:pointer"><td>'+fmt(p)+(p===minP?'<span class="tag">Minimum</span>':'')+(p===recP?'<span class="tag g">Recommended</span>':'')+'</td><td class="'+(pr<0?'neg':'')+'">'+fmt(pr)+'</td><td>'+pct(p>0?pr/p*100:0)+'</td></tr>';}).join("");
+  // payments
+  var wd=parseD(S.weddingDate);
+  var dl=parseD(S.finalDeadline)||(wd?addDays(wd,-7):null);
+  if(document.activeElement!==$("finalDeadline"))$("finalDeadline").value=dl?iso(dl):"";
+  $("deadlineHint").textContent=S.finalDeadline?"Custom deadline (clear it to use 7 days before the wedding).":"Defaults to 7 days before the wedding.";
+  var status;
+  if(c.price<=0)status="No price set";
+  else if(c.received>=c.price-0.005)status="Paid in full";
+  else if(c.received>=c.deposit-0.005&&c.received>0)status="Deposit received · balance due";
+  else if(c.received>0)status="Part deposit received";
+  else status="Awaiting deposit";
+  var overdue=dl&&c.outstanding>0&&addDays(new Date(),0)>addDays(dl,1);
+  $("payStats").innerHTML=stat("Selling price",fmt(c.price),"gold","pay-price")+stat("Deposit required ("+num(S.depositPct)+"%)",fmt(c.deposit),"hl","pay-deposit")+
+    stat("Balance after deposit",fmt(c.balanceAfterDeposit),"","pay-balance")+stat("Amount received",fmt(c.received),"","pay-received")+
+    stat("Outstanding balance",fmt(c.outstanding),"","pay-outstanding")+stat("Payment status",(overdue?'<span class="neg">Overdue · </span>':'')+status,"","pay-status")+
+    stat("Deposit still due",fmt(Math.max(0,c.deposit-c.received)),"","pay-depdue")+stat("Final payment deadline",dl?nice(dl):"Set wedding date","","pay-deadline");
+  renderTimeline(wd,dl);
+  // checklist
+  var done=CHECKS.filter(function(_,i){return S.checks[i];}).length;var p=Math.round(done/CHECKS.length*100);
+  $("checkPct").textContent=p+"%";$("checkCount").textContent="("+done+" of "+CHECKS.length+")";
+  $("checkBar").firstElementChild.style.width=p+"%";$("checkBar").setAttribute("aria-valuenow",p);
+  renderQuote(c,wd,dl);
+}
+function renderTimeline(wd,dl){
+  var steps=[
+    [-28,-14,"2–4 weeks before",["Confirm the order","Collect the deposit","Prepare the fruit cake (soak fruit, bake and feed with rum/wine)","Order supplies and decorations"]],
+    [-7,null,"7 days before",["Buy the remaining supplies","Collect the final payment"]],
+    [-3,null,"3 days before",["Bake the remaining tiers (vanilla, strawberry, cookies and cream); cool, wrap and refrigerate"]],
+    [-2,null,"2 days before",["Fill, frost and crumb-coat; chill well"]],
+    [-1,null,"1 day before",["Fondant and decorations; insert dowels and supports; store cool"]],
+    [0,null,"Wedding day",["Transport in a cooled vehicle","Assemble at the venue","Inspect and touch up","Photograph the cake"]]];
+  $("tlLead").textContent=wd?("Dates calculated from the wedding date: "+nice(wd)+"."):"Set the wedding date in Payments and the dates will fill in automatically.";
+  $("tlList").innerHTML=steps.map(function(s){var date="";
+    if(wd){date=s[1]!==null?(nice(addDays(wd,s[0]))+" – "+nice(addDays(wd,s[1]))):nice(addDays(wd,s[0]));}
+    return '<li><div class="when">'+s[2]+'</div>'+(date?'<div class="date" data-tl="'+s[0]+'">'+date+'</div>':'')+'<ul>'+s[3].map(function(x){return '<li style="margin:0">'+esc(x)+'</li>';}).join("")+'</ul></li>';}).join("")+
+    (dl?'<li><div class="when">Final payment deadline</div><div class="date">'+nice(dl)+'</div></li>':'');
+}
+/* ---------- quotation (customer-facing: NO costs, labour or profit) ---------- */
+function quoteData(c,wd,dl){
+  return {name:S.custName||"",phone:S.custPhone||"",date:wd?nice(wd):"To be confirmed",venue:S.venue||"To be confirmed",guests:S.guests||"",
+    design:S.cakeDesign||"",tiers:S.tiers.map(function(t){return t.name+": "+t.size+" "+t.flavour;}),
+    total:fmt(c.price),depPct:num(S.depositPct),deposit:fmt(c.deposit),balance:fmt(c.balanceAfterDeposit),
+    received:c.received>0?fmt(c.received):"",outstanding:fmt(c.outstanding),deadline:dl?nice(dl):"7 days before the wedding",terms:S.terms||""};
+}
+function quoteText(){
+  var c=calc(),wd=parseD(S.weddingDate),dl=parseD(S.finalDeadline)||(wd?addDays(wd,-7):null),q=quoteData(c,wd,dl);
+  var L=["*The Royal Wedding Cake — Quotation*","","Customer: "+(q.name||"—")].concat(q.phone?["Phone: "+q.phone]:[]).concat(["Wedding date: "+q.date,"Venue: "+q.venue]).concat(q.guests?["Guests: "+q.guests]:[]).concat(["","*Cake*","Five-tier wedding cake"+(q.design?" — "+q.design:"")]).concat(q.tiers.map(function(t){return "• "+t;})).concat(["","*Price*","Total price: "+q.total,"Deposit ("+q.depPct+"%) to confirm: "+q.deposit,"Balance: "+q.balance]).concat(q.received?["Received so far: "+q.received,"Outstanding: "+q.outstanding]:[]).concat(["Final payment due: "+q.deadline,"","*Terms*",q.terms,"","All prices in Eastern Caribbean dollars (EC$)."]);
+  return L.join("\n");
+}
+window.__quoteText=quoteText;
+function renderQuote(c,wd,dl){
+  var q=quoteData(c,wd,dl);
+  function r(k,v){return '<div class="qrow"><span>'+esc(k)+'</span><b>'+esc(v)+'</b></div>';}
+  $("quoteDoc").innerHTML='<h3>♛ Wedding Cake Quotation</h3>'+
+    r("Customer",q.name||"—")+(q.phone?r("Phone",q.phone):"")+r("Wedding date",q.date)+r("Venue",q.venue)+(q.guests?r("Guests",q.guests):"")+
+    '<h3 style="font-size:1.05rem;text-align:left;margin-top:14px">Cake</h3><p>Five-tier wedding cake'+(q.design?" — "+esc(q.design):"")+'</p><ul>'+q.tiers.map(function(t){return '<li>'+esc(t)+'</li>';}).join("")+'</ul>'+
+    '<h3 style="font-size:1.05rem;text-align:left;margin-top:14px">Price</h3>'+r("Total price",q.total)+r("Deposit ("+q.depPct+"%) to confirm",q.deposit)+r("Balance",q.balance)+
+    (q.received?r("Received so far",q.received)+r("Outstanding",q.outstanding):"")+r("Final payment due",q.deadline)+
+    '<h3 style="font-size:1.05rem;text-align:left;margin-top:14px">Terms</h3><pre>'+esc(q.terms)+'</pre><p style="font-size:.85rem;color:#5b6080">All prices in Eastern Caribbean dollars (EC$). Quotation date: '+esc(nice(new Date()))+'.</p>';
+}
+
+/* ---------- events ---------- */
+document.addEventListener("input",function(e){
+  var t=e.target;
+  if(t.dataset.list){var it=S[t.dataset.list][+t.dataset.i];if(!it)return;
+    if(t.type==="checkbox"){it[t.dataset.f]=t.checked;if(t.dataset.list==="shop")t.closest(".row").classList.toggle("done",t.checked);}
+    else it[t.dataset.f]=t.dataset.n?(t.value===""?0:num(t.value)):t.value;
+    changed();return;}
+  if(t.dataset.check!==undefined){S.checks[t.dataset.check]=t.checked;t.closest(".check").classList.toggle("on",t.checked);changed();return;}
+  if(t.dataset.k){var k=t.dataset.k;S[k]=(t.type==="number"&&k!=="guests")?num(t.value):t.value;
+    if(k==="weddingDate")S.finalDeadline="";changed();return;}
+  if(t.id==="finalDeadline"){S.finalDeadline=t.value;changed();return;}
+  if(t.id==="priceSlider"||t.id==="priceInput"){S.price=num(t.value);changed();return;}
+  if(t.id==="labourRate"){S.labourRate=num(t.value);save();return;}
+  if(t.id==="marginInput"){updateAll();return;}
+});
+document.addEventListener("change",function(e){if(e.target.type==="checkbox"&&!e.target.dataset.list&&e.target.dataset.check===undefined)return;});
+document.addEventListener("click",function(e){
+  var t=e.target.closest("[data-del]");
+  if(t){S[t.dataset.del].splice(+t.dataset.i,1);renderLists();changed();return;}
+  var mb=e.target.closest("[data-margin]");if(mb){$("marginInput").value=mb.dataset.margin;updateAll();return;}
+  var tr=e.target.closest("tr[data-price]");if(tr){S.price=num(tr.dataset.price);changed();return;}
+});
+function add(list,obj,focusSel){S[list].push(obj);renderLists();changed();var rows=document.querySelectorAll(focusSel);var last=rows[rows.length-1];if(last){last.focus();last.select&&last.select();}}
+$("addShop").onclick=function(){add("shop",{name:"New ingredient",qty:"",cost:0,bought:false},'#shopRows .iname');};
+$("addDeco").onclick=function(){add("deco",{name:"New decoration",cost:0},'#decoRows input[data-f=name]');};
+$("addExtra").onclick=function(){add("extras",{name:"New expense",cost:0},'#extraRows input[data-f=name]');};
+$("addTask").onclick=function(){add("tasks",{name:"New task",hours:1,rate:num(S.labourRate)||25},'#taskRows input[data-f=name]');};
+$("applyRate").onclick=function(){var r=num($("labourRate").value);S.tasks.forEach(function(t){t.rate=r;});renderTasks();changed();};
+$("applyMargin").onclick=function(){var m=num($("marginInput").value);if(m<0||m>=100)return;S.price=Math.ceil(calc().cost/(1-m/100));changed();};
+function doPrint(cls){document.body.classList.add(cls);setTimeout(function(){window.print();},50);}
+window.addEventListener("afterprint",function(){document.body.classList.remove("print-quote","print-shop");});
+$("printShop").onclick=function(){doPrint("print-shop");};
+$("printQuote").onclick=function(){doPrint("print-quote");};
+$("pdfQuote").onclick=function(){$("quoteMsg").textContent="In the print window, choose “Save as PDF” (on iPhone: Share → Print, then pinch out on the preview → Share → Save to Files).";doPrint("print-quote");};
+$("copyQuote").onclick=function(){var txt=quoteText();
+  function ok(){$("quoteMsg").textContent="Quotation copied. Paste it into a message or email.";}
+  function fallback(){var ta=document.createElement("textarea");ta.value=txt;ta.setAttribute("readonly","");ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();ta.setSelectionRange(0,txt.length);var r=false;try{r=document.execCommand("copy");}catch(e){}document.body.removeChild(ta);r?ok():($("quoteMsg").textContent="Copy failed. Select the quotation text and copy it manually.");}
+  if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(txt).then(ok,fallback);}else fallback();};
+$("waQuote").onclick=function(){var ph=(S.custPhone||"").replace(/[^\d]/g,"");if(ph.length===7)ph="1758"+ph;else if(ph.length===10&&ph.indexOf("758")===0)ph="1"+ph;
+  window.open("https://wa.me/"+(ph||"")+"?text="+encodeURIComponent(quoteText()),"_blank","noopener");};
+$("resetAll").onclick=function(){if(confirm("Reset everything to the default costs and clear all saved data on this device? This cannot be undone.")){localStorage.removeItem(KEY);S=defaults();init();$("lastSaved").textContent="Reset to defaults.";}};
+
+function init(){
+  ["utilities","delivery","contingency","depositPct","received","weddingDate","custName","custPhone","venue","guests","cakeDesign","terms","minPrice","recPrice"].forEach(function(k){$(k).value=S[k]==null?"":S[k];});
+  $("labourRate").value=S.labourRate;
+  $("finalDeadline").value=S.finalDeadline||"";
+  renderLists();updateAll();
+  if(S.savedAt)$("lastSaved").textContent="Last saved on this device: "+new Date(S.savedAt).toLocaleString();
+}
+init();
+})();
+</script>
+</body>
+</html>
